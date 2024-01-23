@@ -22,7 +22,13 @@ public class PopupStartMenu : MonoBehaviour
     {
         characterType = (CharacterType)index;
         var character = GameManager.Instance.CharacterList.Find(item => item.CharacterType == characterType);
-    }
+
+        characterSprite.sprite = character.CharacterSprite;
+        characterSprite.SetNativeSize();
+
+        selectCharacter.SetActive(false);
+		information.SetActive(true);
+	}
 
     public void OnClickJoin()
     {
@@ -31,7 +37,7 @@ public class PopupStartMenu : MonoBehaviour
             return;
         }
 
-        GameManager.Instance.PlayerName.text = inputField.text;
+        GameManager.Instance.SetCharacter(characterType, inputField.text);
 
         Destroy(gameObject);
     }

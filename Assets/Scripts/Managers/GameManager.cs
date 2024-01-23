@@ -14,7 +14,7 @@ public class Character
 {
 	public CharacterType CharacterType;
 	public Sprite CharacterSprite;
-	public RuntimeAnimatorController AnimationController;
+	public RuntimeAnimatorController AnimatorController;
 }
 
 public class GameManager : MonoBehaviour
@@ -32,5 +32,13 @@ public class GameManager : MonoBehaviour
 			Instance = this;
 		else
 			Destroy(gameObject);
+	}
+
+	public void SetCharacter(CharacterType characterType, string name)
+	{
+		var character = GameManager.Instance.CharacterList.Find(item => item.CharacterType == characterType);
+
+		PlayerAnimator.runtimeAnimatorController = character.AnimatorController;
+		PlayerName.text = name;
 	}
 }
